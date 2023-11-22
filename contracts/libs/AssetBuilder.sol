@@ -5,27 +5,25 @@ import {Constants} from "./Constants.sol";
 import {Base64} from "base64-sol/base64.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {MetadataBuilder} from "./MetadataBuilder.sol";
+import {VestData} from "./VestData.sol";
+
 
 library AssetBuilder {
-  function buildSvg(MetadataBuilder.Metadata memory metadata) internal pure returns (string memory) {
+  function buildSvg(VestData.Vdata memory payout) internal pure returns (string memory) {
     uint cellSize = 30;
     string memory baseSvg = Constants.BASESVG;
 
     uint x = cellSize + cellSize / 2;
     uint y = cellSize + cellSize / 2;
 
-    for (uint i = 0; i < metadata.attributes.length; i++) {
-      // payout token
-      string memory newElement = string(
-        abi.encodePacked(
-          '<text x="', Strings.toString(x), '" y="', Strings.toString(y), '" fill="white">',
-          metadata.attributes[i].key, ": ", metadata.attributes[i].value,
-          '</text>'
-      ));
-      baseSvg = string(abi.encodePacked(baseSvg, newElement));
-    }
-
-    /*
+    // payout token
+    string memory newElement = string(
+      abi.encodePacked(
+        '<text x="', Strings.toString(x), '" y="', Strings.toString(y * 2), '" fill="white">',
+        "payoutToken: ", payout.payoutToken,
+        '</text>'
+    ));
+    baseSvg = string(abi.encodePacked(baseSvg, newElement));
 
     // payout
     newElement = string(
@@ -53,7 +51,6 @@ library AssetBuilder {
         '</text>'
     ));
     baseSvg = string(abi.encodePacked(baseSvg, newElement));
-    */
 
     baseSvg = string(abi.encodePacked(baseSvg, Constants.SVGEND));
 

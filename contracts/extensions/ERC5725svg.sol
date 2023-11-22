@@ -6,33 +6,23 @@ import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {AssetBuilder} from "../libs/AssetBuilder.sol";
 import {MetadataBuilder} from "../libs/MetadataBuilder.sol";
 import {Base64Encoder} from "../libs/Base64Encoder.sol";
+import {VestData} from "../libs/VestData.sol";
 
 abstract contract ERC5725svg is ERC5725 {
-  MetadataBuilder.Attribute[] public attributes;
-
-  constructor() {
-    attributes.push(MetadataBuilder.Attribute("payoutToken", "_"));
-    attributes.push(MetadataBuilder.Attribute("payout", "_"));
-    attributes.push(MetadataBuilder.Attribute("startTime", "_"));
-    attributes.push(MetadataBuilder.Attribute("endTime", "_"));
-  }
-
   function tokenURI(uint id) public view override returns (string memory) {
-    return _metadata(id);
+    return metadata(id);
   }
 
-  function _metadata(uint id) public view virtual returns (string memory) {
-    MetadataBuilder.Metadata memory metadata;
-    for (uint i = 0; i < attributes.length; i++) {
-      metadata.attributes
-    }
-//  vestdata.payoutToken = string.concat("0x", toAsciiString(_payoutToken(id)));
-//  vestdata.startTime = Strings.toString(_startTime(id));
-//  vestdata.endTime = Strings.toString(_endTime(id));
+  function metadata(uint id) public view virtual returns (string memory) {
+    VestData.Vdata memory vestdata;
+    vestdata.payout = Strings.toString(_payout(id));
+    vestdata.payoutToken = string.concat("0x", toAsciiString(_payoutToken(id)));
+    vestdata.startTime = Strings.toString(_startTime(id));
+    vestdata.endTime = Strings.toString(_endTime(id));
 
-    string memory image = AssetBuilder.buildSvg(metadata);
+    string memory image = AssetBuilder.buildSvg(vestdata);
     image = Base64Encoder.encodeSvg(image);
-    string memory dataURI = MetadataBuilder.buildMetadata(id, image, metadata);
+    string memory dataURI = MetadataBuilder.buildMetadata(id, "some description", image, vestdata);
     dataURI = Base64Encoder.encodeMetadata(dataURI);
 
     return dataURI;
