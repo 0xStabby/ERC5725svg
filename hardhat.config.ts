@@ -11,6 +11,8 @@ import { Task, Verifier, Network } from './hardhat'
 import { getEnv, Logger, logger, testRunner } from './hardhat/utils'
 import solhintConfig from './solhint.config'
 
+require('dotenv').config();
+
 /**
  * Deploy contracts based on a directory ID in tasks/
  *
@@ -168,7 +170,9 @@ const config: HardhatUserConfig = {
   gasReporter: {
     // More options can be found here:
     // https://www.npmjs.com/package/hardhat-gas-reporter
-    enabled: getEnv('REPORT_GAS') ? true : false,
+    coinmarketcap: String(process.env.CMC_API_KEY),
+    enabled: true, //getEnv('REPORT_GAS') ? true : false,
+    gasPrice: 16,
     currency: 'USD',
     excludeContracts: [],
   },
