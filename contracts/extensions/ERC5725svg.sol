@@ -15,7 +15,7 @@ abstract contract ERC5725svg is ERC5725 {
 
   function getTraits(uint id) public view returns (OnChainDataStructs.Trait[] memory) {
     OnChainDataStructs.Trait[] memory result = new OnChainDataStructs.Trait[](3);
-    result[0] = OnChainDataStructs.Trait("payoutToken", string.concat("0x", toAsciiString(_payoutToken(id))));
+    result[0] = OnChainDataStructs.Trait("payoutToken", string.concat("0x", _toAsciiString(_payoutToken(id))));
     result[1] = OnChainDataStructs.Trait("startTime", Strings.toString(_startTime(id)));
     result[2] = OnChainDataStructs.Trait("endTime", Strings.toString(_endTime(id)));
     return result;
@@ -48,8 +48,8 @@ abstract contract ERC5725svg is ERC5725 {
       bytes1 b = bytes1(uint8(uint(uint160(x)) / (2**(8*(19 - i)))));
       bytes1 hi = bytes1(uint8(b) / 16);
       bytes1 lo = bytes1(uint8(b) - 16 * uint8(hi));
-      s[2*i] = char(hi);
-      s[2*i+1] = char(lo);
+      s[2*i] = _char(hi);
+      s[2*i+1] = _char(lo);
     }
     return string(s);
   }

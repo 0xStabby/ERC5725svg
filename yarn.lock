@@ -24,10 +24,10 @@
     chalk "^2.4.2"
     js-tokens "^4.0.0"
 
-"@bitbytebin/onchain@^0.0.0-beta.3":
-  version "0.0.0-beta.3"
-  resolved "https://registry.npmjs.org/@bitbytebin/onchain/-/onchain-0.0.0-beta.3.tgz"
-  integrity sha512-61ryOPuwtogrw7KsROmLdfDsnyudv87QUk0+IyDuuQ4y3DzqPY3i5u7iYqIhB58y88YKNdJ78jXu/hoaqrAzsw==
+"@bitbytebin/onchain@^0.0.0-beta.5":
+  version "0.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@bitbytebin/onchain/-/onchain-0.0.0-beta.5.tgz#c59b3fa181901cf4f06c537c013b1853ea66dbc3"
+  integrity sha512-xoV+y+SaBmelqze1Cx+uB9ISmgXPF9zZGQGIbqiy4EB798Xh76p/5o29lrxsVz2nh8gO4wP/l1xYiNvGBcKDEg==
   dependencies:
     "@openzeppelin/contracts" "^5.0.0"
     base64-sol "^1.1.0"

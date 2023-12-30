@@ -1,6 +1,6 @@
 {
-  "name": "@erc-5725/sdk",
-  "version": "1.0.1",
+  "name": "erc5725svg",
+  "version": "0.0.0-beta.0",
   "description": "ERC-5725: Transferrable Vesting NFT - Reference Implementation.",
   "main": "dist/src/index.js",
   "files": [
