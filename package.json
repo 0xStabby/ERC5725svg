@@ -89,9 +89,9 @@
     "typescript": ">=4.5.0"
   },
   "dependencies": {
+    "@bitbytebin/onchain": "^0.0.0-beta.3",
     "@erc-5725/interfaces": "^1.1.2",
     "@openzeppelin/contracts": "^4.7.3",
-    "@openzeppelin/contracts-upgradeable": "^4.7.3",
-    "base64-sol": "^1.1.0"
+    "@openzeppelin/contracts-upgradeable": "^4.7.3"
   }
 }

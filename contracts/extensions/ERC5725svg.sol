@@ -3,29 +3,43 @@ pragma solidity ^0.8.17;
 
 import {ERC5725} from "../ERC5725.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
-import {AssetBuilder} from "../libs/AssetBuilder.sol";
-import {MetadataBuilder} from "../libs/MetadataBuilder.sol";
-import {Base64Encoder} from "../libs/Base64Encoder.sol";
-import {VestData} from "../libs/VestData.sol";
+import {AssetBuilder} from "@bitbytebin/onchain/contracts/libs/AssetBuilder.sol";
+import {MetadataBuilder} from "@bitbytebin/onchain/contracts/libs/MetadataBuilder.sol";
+import {Base64Encoder} from "@bitbytebin/onchain/contracts/libs/Base64Encoder.sol";
+import {OnChainDataStructs} from "@bitbytebin/onchain/contracts/libs/OnChainDataStructs.sol";
 
 abstract contract ERC5725svg is ERC5725 {
   function tokenURI(uint id) public view override returns (string memory) {
-    return metadata(id);
+    return getMetadata(id);
   }
 
-  function metadata(uint id) public view virtual returns (string memory) {
-    VestData.Vdata memory vestdata;
-    vestdata.payout = Strings.toString(_payout(id));
-    vestdata.payoutToken = string.concat("0x", toAsciiString(_payoutToken(id)));
-    vestdata.startTime = Strings.toString(_startTime(id));
-    vestdata.endTime = Strings.toString(_endTime(id));
+  function getTraits(uint id) public view returns (OnChainDataStructs.Trait[] memory) {
+    OnChainDataStructs.Trait[] memory result = new OnChainDataStructs.Trait[](3);
+    result[0] = OnChainDataStructs.Trait("payoutToken", string.concat("0x", toAsciiString(_payoutToken(id))));
+    result[1] = OnChainDataStructs.Trait("startTime", Strings.toString(_startTime(id)));
+    result[2] = OnChainDataStructs.Trait("endTime", Strings.toString(_endTime(id)));
+    return result;
+  }
 
-    string memory image = AssetBuilder.buildSvg(vestdata);
-    image = Base64Encoder.encodeSvg(image);
-    string memory dataURI = MetadataBuilder.buildMetadata(id, "some description", image, vestdata);
-    dataURI = Base64Encoder.encodeMetadata(dataURI);
+  function getMetadata(uint id) public view virtual returns (string memory) {
+    return Base64Encoder.encodeMetadata(
+      MetadataBuilder.buildMetadata(
+        id, getImage(id),
+        OnChainDataStructs.Metadata(
+          "name",
+          "description",
+          getTraits(id)
+        )));
+  }
 
-    return dataURI;
+  function getImage(uint id) public view virtual returns (string memory) {
+    return Base64Encoder.encodeSvg(
+      AssetBuilder.buildSvg(
+        OnChainDataStructs.Metadata(
+          "name",
+          "description",
+          getTraits(id)
+        )));
   }
 
   function toAsciiString(address x) internal pure returns (string memory) {
