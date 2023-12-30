@@ -159,7 +159,12 @@ const networkConfig: Record<Network, NetworkUserConfig> = {
 
 const config: HardhatUserConfig = {
   // Storing this single source of truth in `solhint.config.js`
-  solidity: solhintConfig.rules['compiler-version'][1],
+  solidity: {
+    compilers: [
+      { version: solhintConfig.rules['compiler-version'][1] },
+      { version: "0.8.20" }
+    ]
+  },
   networks: {
     ...networkConfig,
     hardhat: {
