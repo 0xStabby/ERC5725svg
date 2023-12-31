@@ -1,7 +1,7 @@
 {
   "name": "erc5725svg",
-  "version": "0.0.0-beta.0",
-  "description": "Transferrable Vesting NFT with OnChain Metadata/SVG.",
+  "version": "0.0.0-beta.1",
+  "description": "ERC5725 extension for on chain svgs from data",
   "files": [
     "README.md",
     "contracts/ERC5725.sol",
