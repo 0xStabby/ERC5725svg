@@ -1,18 +1,11 @@
 {
   "name": "erc5725svg",
   "version": "0.0.0-beta.0",
-  "description": "ERC-5725: Transferrable Vesting NFT - Reference Implementation.",
-  "main": "dist/src/index.js",
+  "description": "Transferrable Vesting NFT with OnChain Metadata/SVG.",
   "files": [
     "README.md",
-    "dist/index.js",
-    "dist/index.d.ts",
-    "dist/src/**/*",
-    "dist/typechain-types/**/*",
-    "dist/artifacts/contracts/ERC5725.sol/ERC5725.json",
-    "dist/artifacts/contracts/IERC5725.sol/IERC5725.json",
     "contracts/ERC5725.sol",
-    "contracts/IERC5725.sol"
+    "contracts/extensions/ERC5725svg.sol"
   ],
   "scripts": {
     "precommit": "yarn compile && yarn test && yarn lint:fix",
@@ -41,10 +34,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ERC-5725/ERC-5725-reference.git"
+    "url": "git+https://github.com/0xStabby/ERC5725svg.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "0xstabby",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ERC-5725/ERC-5725-reference/issues"
