@@ -1,4 +1,4 @@
-# ERC-5725: Transferrable Vesting NFT - Reference Implementation
+# erc5725svg: Transferrable Vesting NFT with OnChain Metadata/SVG.
 [![lint & test](https://github.com/ERC-5725/ERC-5725-reference/actions/workflows/lint-test.yml/badge.svg)](https://github.com/ERC-5725/ERC-5725-reference/actions/workflows/lint-test.yml)
 [![Docs](https://img.shields.io/badge/docs-%F0%9F%93%84-yellow)](./docs/)
 [![License](https://img.shields.io/badge/License-GPLv3-green.svg)](https://www.gnu.org/licenses/gpl-3.0)

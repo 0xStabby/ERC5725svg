@@ -39,10 +39,6 @@
   "keywords": [],
   "author": "0xstabby",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ERC-5725/ERC-5725-reference/issues"
-  },
-  "homepage": "https://github.com/ERC-5725/ERC-5725-reference#readme",
   "resolutions": {
     "got": "^11.8.5",
     "node-fetch": "^2.6.7",
